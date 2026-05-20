@@ -1,0 +1,15 @@
+docker build -t jenkins-terraform-ansible .
+docker run -d -p 8080:8080 -p 50000:50000 jenkins-terraform-ansible
+docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins-terraform-ansible
+
+
+
+
+terraform init
+terraform plan
+terraform apply
+terraform destroy -auto-approve
+
+ansible-playbook -i inventory.ini setup-liberty.yml
+ansible-playbook -i inventory.ini controller.yml
+ansible-playbook -i inventory.ini member.yml

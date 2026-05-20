@@ -1,0 +1,35 @@
+---
+- name: Install Java 21 and Liberty
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Java 21
+      apt:
+        name: openjdk-21-jdk
+        state: present
+
+    - name: Install unzip
+      apt:
+        name: unzip
+        state: present
+
+    - name: Download Liberty runtime
+      get_url:
+        url: https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/downloads/wlp/latest/wlp-runtime.zip
+        dest: /tmp/wlp-runtime.zip
+
+    - name: Extract Liberty
+      unarchive:
+        src: /tmp/wlp-runtime.zip
+        dest: /opt/
+        remote_src: yes
+
+    - name: Add Liberty to PATH
+      lineinfile:
+        path: /etc/profile.d/liberty.sh
+        line: 'export PATH=$PATH:/opt/wlp/bin'
+        create: yes

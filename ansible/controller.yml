@@ -1,0 +1,10 @@
+---
+- name: Configure Liberty Controller
+  hosts: controller
+  become: yes
+  tasks:
+    - name: Create controller server
+      command: /opt/wlp/bin/server create controllerServer
+
+    - name: Start controller
+      command: /opt/wlp/bin/server start controllerServer

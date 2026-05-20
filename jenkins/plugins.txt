@@ -1,0 +1,33 @@
+# Core pipeline + job DSL
+workflow-aggregator:latest
+pipeline-stage-view:latest
+pipeline-utility-steps:latest
+job-dsl:latest
+
+# Build tools
+gradle:latest
+groovy:latest
+ant:latest
+maven-plugin:latest
+
+# Source control
+git:latest
+git-client:latest
+github:latest
+github-branch-source:latest
+
+# Credentials & secrets
+credentials:latest
+credentials-binding:latest
+ssh-agent:latest
+
+# Infrastructure / cloud
+terraform:latest
+ansible:latest
+aws-credentials:latest
+amazon-ecs:latest
+
+# Notifications & UI
+email-ext:latest
+mailer:latest
+blueocean:latest

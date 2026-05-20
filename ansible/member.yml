@@ -1,0 +1,14 @@
+---
+- name: Configure Liberty Member
+  hosts: members
+  become: yes
+  tasks:
+    - name: Create member server
+      command: /opt/wlp/bin/server create memberServer
+
+    - name: Join collective
+      command: >
+        /opt/wlp/bin/collective join
+        controllerServer
+        --host={{ hostvars['controller']['ansible_host'] }}
+        --user=admin --password=adminpwd
