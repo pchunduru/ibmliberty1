@@ -24,8 +24,10 @@ pipeline {
       when { expression { env.RUN_ANSIBLE == "true" } }
       steps {
         echo "Installing Java 21 and IBM Liberty..."
-        dir('ansible') {
-          sh 'ansible-playbook -i inventory.ini setup-liberty.yml'
+        withCredentials([sshUserPrivateKey(credentialsId: 'libertypocpem', keyFileVariable: 'KEYFILE')]) {
+          dir('ansible') {
+            sh 'ansible-playbook -i inventory.ini setup-liberty.yml --private-key $KEYFILE'
+          }
         }
       }
     }
@@ -34,8 +36,10 @@ pipeline {
       when { expression { env.RUN_ANSIBLE == "true" } }
       steps {
         echo "Configuring Liberty Controller..."
-        dir('ansible') {
-          sh 'ansible-playbook -i inventory.ini controller.yml'
+        withCredentials([sshUserPrivateKey(credentialsId: 'libertypocpem', keyFileVariable: 'KEYFILE')]) {
+          dir('ansible') {
+            sh 'ansible-playbook -i inventory.ini controller.yml --private-key $KEYFILE'
+          }
         }
       }
     }
@@ -44,8 +48,10 @@ pipeline {
       when { expression { env.RUN_ANSIBLE == "true" } }
       steps {
         echo "Configuring Liberty Member..."
-        dir('ansible') {
-          sh 'ansible-playbook -i inventory.ini member.yml'
+        withCredentials([sshUserPrivateKey(credentialsId: 'libertypocpem', keyFileVariable: 'KEYFILE')]) {
+          dir('ansible') {
+            sh 'ansible-playbook -i inventory.ini member.yml --private-key $KEYFILE'
+          }
         }
       }
     }
