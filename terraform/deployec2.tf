@@ -87,7 +87,7 @@ resource "aws_security_group" "liberty_sg" {
 
 # --- Controller Node ---
 resource "aws_instance" "liberty_controller" {
-  ami           = "ami-0f8d4f93ed5bc1a73" # Ubuntu 22.04 LTS in ap-south-2
+  ami           = "ami-024ebedf48d280810" # Ubuntu 22.04 LTS in ap-south-2
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.liberty_subnet.id
   vpc_security_group_ids = [aws_security_group.liberty_sg.id]
@@ -97,7 +97,7 @@ resource "aws_instance" "liberty_controller" {
 
 # --- Member Node ---
 resource "aws_instance" "liberty_member" {
-  ami           = "ami-0f8d4f93ed5bc1a73"
+  ami           = "ami-024ebedf48d280810"
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.liberty_subnet.id
   vpc_security_group_ids = [aws_security_group.liberty_sg.id]

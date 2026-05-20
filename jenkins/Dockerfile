@@ -16,6 +16,12 @@ RUN curl -fsSL https://releases.hashicorp.com/terraform/1.9.0/terraform_1.9.0_li
 RUN pip3 install ansible --break-system-packages
 #RUN apt-get update && apt-get install -y ansible
 
+# Install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && rm -rf awscliv2.zip aws
+
 USER jenkins
 
 
