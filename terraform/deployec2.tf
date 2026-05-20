@@ -117,3 +117,12 @@ output "member_ip" {
 output "liberty_console_url" {
   value = "http://${aws_instance.liberty_controller.public_ip}:9060/ibm/console"
 }
+
+output "controller_ip" {
+  value = aws_instance.liberty_controller.public_ip
+}
+
+output "member_ip" {
+  value = aws_instance.liberty_member.public_ip
+}
+

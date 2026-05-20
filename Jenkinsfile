@@ -20,6 +20,24 @@ pipeline {
       }
     }
 
+    stage('Generate Dynamic Inventory') {
+      steps {
+        script {
+          def controller_ip = sh(script: "terraform output -raw controller_ip", returnStdout: true).trim()
+          def member_ip     = sh(script: "terraform output -raw member_ip", returnStdout: true).trim()
+
+          writeFile file: 'ansible/inventory.ini', text: """
+          [controller]
+          ${controller_ip} ansible_user=ubuntu ansible_ssh_private_key_file=$KEYFILE
+
+          [members]
+          ${member_ip} ansible_user=ubuntu ansible_ssh_private_key_file=$KEYFILE
+        """
+        }
+      }
+    }
+
+
     stage('Ansible Setup - Java & Liberty') {
       when { expression { env.RUN_ANSIBLE == "true" } }
       steps {
