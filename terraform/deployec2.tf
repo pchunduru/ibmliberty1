@@ -91,7 +91,7 @@ resource "aws_instance" "liberty_controller" {
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.liberty_subnet.id
   vpc_security_group_ids = [aws_security_group.liberty_sg.id]
-  key_name      = "libertypoc"
+  key_name      = "libertypocpem"
   tags = { Role = "controller", Name = "liberty-controller" }
 }
 
@@ -101,7 +101,7 @@ resource "aws_instance" "liberty_member" {
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.liberty_subnet.id
   vpc_security_group_ids = [aws_security_group.liberty_sg.id]
-  key_name      = "libertypoc"
+  key_name      = "libertypocpem"
   tags = { Role = "member", Name = "liberty-member" }
 }
 
